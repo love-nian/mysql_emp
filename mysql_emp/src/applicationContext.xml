@@ -52,12 +52,17 @@
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="servicePointcut"/>
 	</aop:config>
 	
+	<!-- Dao包扫描器 -->
 	<bean id="mapperScanner" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
 		<property name="basePackage" value="com/mo/dao"/>
 	</bean>
 	
+	<!-- 业务逻辑层注入Dao接口 -->
 	<bean id="empService" class="com.mo.service.impl.EmpServiceImpl">
 		<property name="empMapper" ref="empMapper"/>
+	</bean>
+	<bean id="deptService" class="com.mo.service.impl.DeptServiceImpl">
+		<property name="deptMapper" ref="deptMapper"/>
 	</bean>
 </beans>

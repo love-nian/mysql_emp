@@ -5,7 +5,7 @@
  	<resultMap type="com.mo.entity.Emp" id="Emp">
  		<!-- 员工对象自身的各种属性 -->
  		<id column="empno" property="empno"/>
- 		<result column="empno" property="empno"/>
+ 		<result column="ename" property="ename"/>
  		<result column="job" property="job"/>
  		<result column="mgr" property="mgr"/>
  		<result column="sal" property="sal"/>

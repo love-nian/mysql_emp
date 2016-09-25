@@ -7,7 +7,12 @@ import com.mo.entity.Dept;
 
 public interface DeptMapper {
 
-	public List<Dept> finDepts(Map<String, Object> map);
+	/**
+	 * 查询所有的部门及其所包含的员工
+	 * @param map
+	 * @return
+	 */
+	public List<Dept> findDepts(Map<String, Object> map);
 	
 	public Dept findById(Integer deptno);
 	

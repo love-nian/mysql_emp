@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mo.dao.DeptMapper">
- 
+	<resultMap type="com.mo.entity.Dept" id="Dept">
+		<id column="deptno" property="deptno" />
+		<result column="dname" property="dname" />
+		<result column="loc" property="loc" />
+
+		<collection property="emps" ofType="com.mo.entity.Emp">
+			<id column="empno" property="empno" />
+			<result column="ename" property="ename" />
+			<result column="job" property="job" />
+			<result column="mgr" property="mgr" />
+			<result column="sal" property="sal" />
+			<result column="comm" property="comm" />
+		</collection>
+	</resultMap>
+	
+	<select id="findDepts" resultMap="Dept" parameterType="java.util.Map">
+		select d.*,e.* from dept d inner join emp e on d.deptno = e.deptno
+	</select>
+
 </mapper>

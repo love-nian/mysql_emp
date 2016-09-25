@@ -1,5 +1,6 @@
 package com.mo.entity;
 
+import java.util.List;
 import java.util.Set;
 
 public class Dept {
@@ -7,22 +8,10 @@ public class Dept {
 	private Integer deptno;
 	private String dname ;
 	private String loc ;
-	private Set<Emp> emps ;
-	public Dept(Integer deptno, String dname, String loc, Set<Emp> emps) {
-		super();
-		this.deptno = deptno;
-		this.dname = dname;
-		this.loc = loc;
-		this.emps = emps;
-	}
+	private List<Emp> emps ;
 	public Dept() {
 		super();
 		// TODO Auto-generated constructor stub
-	}
-	@Override
-	public String toString() {
-		return "Dept [deptno=" + deptno + ", dname=" + dname + ", loc=" + loc
-				+ ", emps=" + emps + "]";
 	}
 	public Integer getDeptno() {
 		return deptno;
@@ -42,10 +31,22 @@ public class Dept {
 	public void setLoc(String loc) {
 		this.loc = loc;
 	}
-	public Set<Emp> getEmps() {
+	@Override
+	public String toString() {
+		return "Dept [deptno=" + deptno + ", dname=" + dname + ", loc=" + loc
+				+ ", emps=" + emps + "]";
+	}
+	public Dept(Integer deptno, String dname, String loc, List<Emp> emps) {
+		super();
+		this.deptno = deptno;
+		this.dname = dname;
+		this.loc = loc;
+		this.emps = emps;
+	}
+	public List<Emp> getEmps() {
 		return emps;
 	}
-	public void setEmps(Set<Emp> emps) {
+	public void setEmps(List<Emp> emps) {
 		this.emps = emps;
 	}
 }
