@@ -11,6 +11,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.mo.entity.Emp;
+import com.mo.entity.Pager;
 import com.mo.service.EmpService;
 
 public class EmpServiceImplTest {
@@ -29,8 +30,15 @@ public class EmpServiceImplTest {
 	@Test
 	public void testFindEmps() throws Exception {
 		EmpService empService = (EmpService) context.getBean("empService");
-		List<Emp> list = empService.findEmps();
-		System.out.println(list);
+		Pager pager = new Pager();
+		Emp emp = new Emp();
+		pager.setCurrPage(1);
+		pager.setPageSize(5);
+		emp.setJob("销售员");
+		List<Emp> list = empService.findEmps(pager,emp);
+		for (Emp emp2 : list) {
+			System.out.println(emp2);
+		}
 	}
 
 }

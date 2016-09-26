@@ -20,7 +20,25 @@
  		
  	</resultMap>
  	
+ 	<!-- 动态查询所有的员工，并关联查出其所在的部门 -->
  	<select id="findEmps" resultMap="Emp" parameterType="java.util.Map">
  		SELECT e.*,d.dname,d.loc FROM emp e,dept d WHERE e.deptno = d.deptno 
+ 			<if test="emp.ename!=null">
+ 				and e.ename like %${emp.ename}%,
+ 			</if>
+ 			<if test="emp.mgr!=null">
+ 				and e.mgr = #{emp.mgr},
+ 			</if>
+ 			<if test="emp.job!=null">
+ 				and e.job = #{emp.job}
+ 			</if>
+ 			<if test="emp.sal!=null">
+ 				and e.sal = #{emp.sal},
+ 			</if>
+ 			<if test="emp.comm!=null">
+ 				and e.comm = #{emp.comm},
+ 			</if>
+ 			order by e.empno 
+ 			limit #{offset},#{pagesize}
  	</select>
 </mapper>

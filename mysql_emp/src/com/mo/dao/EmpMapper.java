@@ -9,4 +9,6 @@ public interface EmpMapper {
 
 	public List<Emp> findEmps(Map<String, Object> map) throws Exception;
 	
+	
+	
 }
