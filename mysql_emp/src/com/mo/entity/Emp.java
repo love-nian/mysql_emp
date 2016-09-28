@@ -1,5 +1,9 @@
 package com.mo.entity;
 
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Emp {
 
 	private Integer empno;
@@ -8,6 +12,8 @@ public class Emp {
 	private Integer mgr ;
 	private Double sal ;
 	private Double comm ;
+	//@DateTimeFormat(pattern="yyyy-MM-dd")
+	private Date hiredate;
 	private Dept dept;
 	@Override
 	public String toString() {
@@ -19,13 +25,14 @@ public class Emp {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Emp(Integer empno, String ename, String job, Integer mgr,
+	public Emp(Integer empno, String ename, String job, Integer mgr, Date hiredate,
 			Double sal, Double comm, Dept dept) {
 		super();
 		this.empno = empno;
 		this.ename = ename;
 		this.job = job;
 		this.mgr = mgr;
+		this.hiredate = hiredate;
 		this.sal = sal;
 		this.comm = comm;
 		this.dept = dept;
@@ -65,6 +72,12 @@ public class Emp {
 	}
 	public void setComm(Double comm) {
 		this.comm = comm;
+	}
+	public Date getHiredate() {
+		return hiredate;
+	}
+	public void setHiredate(Date hiredate) {
+		this.hiredate = hiredate;
 	}
 	public Dept getDept() {
 		return dept;
