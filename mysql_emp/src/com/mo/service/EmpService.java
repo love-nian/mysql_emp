@@ -22,5 +22,13 @@ public interface EmpService {
 	 * @throws Exception
 	 */
 	public List<Emp> findEmps(Pager pager,Emp emp) throws Exception;
+	
+	/**
+	 * 根据ID查询员工信息
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
+	public Emp findById(Integer id) throws Exception;
 
 }

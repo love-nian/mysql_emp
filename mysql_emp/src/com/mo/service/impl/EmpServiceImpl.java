@@ -41,5 +41,9 @@ public class EmpServiceImpl implements EmpService {
 	public Integer getCount() throws Exception {
 		return empMapper.getCount();
 	}
+	
+	public Emp findById(Integer id) throws Exception{
+		return empMapper.findByid(id);
+	}
 
 }

@@ -40,5 +40,11 @@ public class EmpServiceImplTest {
 			System.out.println(emp2);
 		}
 	}
+	
+	@Test
+	public void testFindById() throws Exception{
+		
+	}
+	
 
 }

@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -53,6 +54,17 @@ public class EmpController {
 			LOGGER.error(e.getMessage());
 			return null;
 		}
+	}
+	
+	@RequestMapping(value="findById.do",method={RequestMethod.GET})
+	public String findById(Integer empno,Model model){
+		try {
+			//调用业务层的根据ID得到员工信息
+			empService.findById(empno);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return null;
 	}
 
 }
