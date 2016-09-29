@@ -10,8 +10,8 @@
 		<result column="mgr" property="mgr" />
 		<result column="sal" property="sal" />
 		<result column="comm" property="comm" />
-		<result column="hiredate" property="hiredate"/>
-
+		<result column="hiredate" property="hiredate" />
+		<result column="deptno" property="deptno"/>
 		<!-- 引入部门做为属性 -->
 		<association property="dept" javaType="com.mo.entity.Dept">
 			<id column="deptno" property="deptno" />
@@ -20,11 +20,23 @@
 		</association>
 
 	</resultMap>
-	
+
 	<!-- 查询总记录数 -->
 	<select id="getCount" resultType="java.lang.Integer">
 		select count(1) from emp
 	</select>
+
+	<!-- 根据员工编号和姓名查询员工 -->
+	<select id="login" resultMap="Emp" parameterType="com.mo.entity.Emp">
+		select * from
+		emp where empno = #{empno} and ename=#{ename}
+	</select>
+
+	<!-- 删除员工 -->
+	<delete id="deleteEmp" parameterType="java.lang.Integer">
+		delete from emp
+		where empno = #{empno,jdbcType=INTEGER}
+	</delete>
 
 	<!-- 动态查询所有的员工，并关联查出其所在的部门 -->
 	<select id="findEmps" resultMap="Emp" parameterType="java.util.Map">
@@ -53,59 +65,94 @@
 
 	<!-- 根据ID查询员工 -->
 	<select id="findByid" resultMap="Emp" parameterType="java.lang.Integer">
-		select
-		e.*,d.dname,d.loc from emp e inner join dept d on e.deptno = d.deptno
-		where e.empno=#{empno}
+		<!-- select * from emp where empno=#{empno} -->
+		select e.*,d.* from emp e left join dept d on e.deptno=d.deptno where e.empno = #{empno}
 	</select>
 
 	<!-- 动态新增员工 -->
 	<insert id="insertEmp" parameterType="com.mo.entity.Emp">
-		insert into emp (
-		<if test="ename!=nulll">
-			ename,
-		</if>
-		<if test="mgr!=null">
-			mgr,
-		</if>
-		<if test="job!=null">
-			job,
-		</if>
-		<if test="sal!=null">
-			sal,
-		</if>
-		<if test="comm!=null">
-			comm,
-		</if>
-		<if test="hiredate!=null">
-			hiredate,
-		</if>
-		<if test="deptno!=null">
-			deptno,
-		</if>
-		) values (
-		<if test="ename!=nulll">
-			#{ename},
-		</if>
-		<if test="mgr!=null">
-			#{mgr},
-		</if>
-		<if test="job!=null">
-			#{job},
-		</if>
-		<if test="sal!=null">
-			#{sal},
-		</if>
-		<if test="comm!=null">
-			#{comm},
-		</if>
-		<if test="hiredate!=null">
-			#{hiredate},
-		</if>
-		<if test="deptno!=null">
-			#{deptno},
-		</if>
-		)
-	</insert>
+    insert into emp
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="empno != null">
+        empno,
+      </if>
+      <if test="ename != null">
+        ename,
+      </if>
+      <if test="job != null">
+        job,
+      </if>
+      <if test="mgr != null">
+        mgr,
+      </if>
+      <if test="hiredate != null">
+        hiredate,
+      </if>
+      <if test="sal != null">
+        sal,
+      </if>
+      <if test="comm != null">
+        COMM,
+      </if>
+      <if test="deptno != null">
+        deptno,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="empno != null">
+        #{empno,jdbcType=INTEGER},
+      </if>
+      <if test="ename != null">
+        #{ename,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null">
+        #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="mgr != null">
+        #{mgr,jdbcType=INTEGER},
+      </if>
+      <if test="hiredate != null">
+        #{hiredate,jdbcType=DATE},
+      </if>
+      <if test="sal != null">
+        #{sal,jdbcType=DECIMAL},
+      </if>
+      <if test="comm != null">
+        #{comm,jdbcType=DECIMAL},
+      </if>
+      <if test="deptno != null">
+        #{deptno,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  
+  <!-- 修改员工信息 -->
+	<update id="updateEmp" parameterType="com.mo.entity.Emp">
+    update emp
+    <set>
+      <if test="ename != null">
+        ename = #{ename,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null">
+        job = #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="mgr != null">
+        mgr = #{mgr,jdbcType=INTEGER},
+      </if>
+      <if test="hiredate != null">
+        hiredate = #{hiredate,jdbcType=DATE},
+      </if>
+      <if test="sal != null">
+        sal = #{sal,jdbcType=DECIMAL},
+      </if>
+      <if test="comm != null">
+        COMM = #{comm,jdbcType=DECIMAL},
+      </if>
+      <if test="deptno != null">
+        deptno = #{deptno,jdbcType=INTEGER},
+      </if>
+    </set>
+    where empno = #{empno,jdbcType=INTEGER}
+  </update>
 
-	
 </mapper>

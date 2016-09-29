@@ -46,4 +46,36 @@ public class EmpServiceImpl implements EmpService {
 		return empMapper.findByid(id);
 	}
 
+	@Override
+	public boolean updateEmp(Emp emp) throws Exception {
+		if (empMapper.updateEmp(emp)==1) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean addEmp(Emp emp) throws Exception {
+		if (empMapper.insertEmp(emp)==1) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean deleteEmp(Integer id) throws Exception {
+		if (empMapper.deleteEmp(id)==1) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean login(Emp emp) throws Exception {
+		if (empMapper.login(emp)!=null) {
+			return true;
+		}
+		return false;
+	}
+
 }

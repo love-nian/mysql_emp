@@ -1,6 +1,10 @@
 package com.mo.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +13,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.mo.entity.Dept;
 import com.mo.entity.Emp;
 import com.mo.entity.Pager;
+import com.mo.service.DeptService;
 import com.mo.service.EmpService;
 
 /**
@@ -30,6 +37,29 @@ public class EmpController {
 	private EmpService empService;
 	public void setEmpService(EmpService empService) {
 		this.empService = empService;
+	}
+	@Autowired
+	private DeptService deptService;
+	public void setDeptService(DeptService deptService) {
+		this.deptService = deptService;
+	}
+
+	@RequestMapping(value="login.do",method={RequestMethod.POST})
+	public String login(Emp emp,Model model){
+		try {
+			boolean result = empService.login(emp);
+			if (result) {
+				//model.addAttribute(result, "")
+				//登录成功后转至一个公共的跳转页面
+				return "success";
+			}
+			return "login";
+			//return new ModelAndView("login");
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+			return "login";
+			//return new ModelAndView("login");
+		}
 	}
 
 	/**
@@ -56,15 +86,91 @@ public class EmpController {
 		}
 	}
 	
+	/**
+	 * 修改前的查询详情
+	 * @param empno
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value="findById.do",method={RequestMethod.GET})
 	public String findById(Integer empno,Model model){
 		try {
 			//调用业务层的根据ID得到员工信息
-			empService.findById(empno);
+			Emp emp = empService.findById(empno);
+			LOGGER.info(emp);
+			//查出所有的部门
+			List<Dept> depts = deptService.findDepts();
+			/*Map<Integer, Object> deptNames = new HashMap<Integer, Object>();
+			//把部门编号和对应的部门名封装到Map中
+			for (Dept dept : depts) {
+				deptNames.put(dept.getDeptno(), dept.getDname());
+			}
+			emp.setDeptNames(deptNames);*/
+			model.addAttribute("depts", depts);
+			model.addAttribute("data", emp);
 		} catch (Exception e) {
-			// TODO: handle exception
+			LOGGER.error(e.getMessage());
 		}
-		return null;
+		return "emp_update";
+	}
+	
+	/**
+	 * 修改员工
+	 * @param emp
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value="updateEmp.do",method={RequestMethod.POST})
+	public String updateEmp(Emp emp,Model model){
+		try {
+			boolean result = empService.updateEmp(emp);
+			//修改后跳转至查询所有
+			if (result) {
+				//model.addAttribute(result, "")
+				//登录成功后转至一个公共的跳转页面
+				return "success";
+			}
+			return "emp_update";
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+			return "emp_update";
+		}
+	}
+	
+	/**
+	 * 新增员工
+	 * @param emp
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value="addEmp.do",method={RequestMethod.POST})
+	public String addEmp(Emp emp,Model model){
+		try {
+			boolean result = empService.addEmp(emp);
+			if (result) {
+				return "success";
+			}return "emp_add";
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+			return "emp_add";
+		}
+	}
+	
+	/**
+	 * 删除员工
+	 * @param emp
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("delete.do")
+	public String deleteEmp(Emp emp,Model model){
+		try {
+			empService.deleteEmp(emp.getEmpno());
+				return "success";
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+			return "success";
+		}
 	}
 
 }

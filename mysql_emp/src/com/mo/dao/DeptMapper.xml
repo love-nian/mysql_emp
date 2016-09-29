@@ -16,20 +16,8 @@
 		</collection>
 	</resultMap>
 	
-	<!-- 根据条件动态查询所有部门 -->
-	<select id="findDepts" resultMap="Dept" parameterType="java.util.Map">
-		select d.*,e.* from dept d inner join emp e on d.deptno = e.deptno 
-		<where>
-			<if test="dept.deptno!=null">
-				d.deptno = #{dept.deptno},
-			</if>
-			<if test="dept.dname!=null">
-				d.dname = #{dept.dname},
-			</if>
-			<if test="dept.loc!=null">
-				d.loc = #{dept.loc}
-			</if>
-		</where>
+	<select id="findDepts" resultMap="Dept">
+		select * from dept
 	</select>
 
 </mapper>

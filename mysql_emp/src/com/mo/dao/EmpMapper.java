@@ -54,7 +54,12 @@ public interface EmpMapper {
 	 */
 	public Integer insertEmp(Emp emp)throws Exception;
 	
-	
-	
+	/**
+	 * 根据员工编号和姓名查询用户，实现登录
+	 * @param emp
+	 * @return
+	 * @throws Exception
+	 */
+	public Emp login(Emp emp) throws Exception;
 	
 }

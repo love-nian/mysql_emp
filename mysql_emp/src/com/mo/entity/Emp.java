@@ -1,6 +1,8 @@
 package com.mo.entity;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -12,30 +14,36 @@ public class Emp {
 	private Integer mgr ;
 	private Double sal ;
 	private Double comm ;
-	//@DateTimeFormat(pattern="yyyy-MM-dd")
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date hiredate;
+	private Integer deptno;
 	private Dept dept;
+	
 	@Override
 	public String toString() {
 		return "Emp [empno=" + empno + ", ename=" + ename + ", job=" + job
 				+ ", mgr=" + mgr + ", sal=" + sal + ", comm=" + comm
-				+ ", dept=" + dept + "]";
+				+ ", hiredate=" + hiredate + ", deptno=" + deptno + "]";
 	}
 	public Emp() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Emp(Integer empno, String ename, String job, Integer mgr, Date hiredate,
-			Double sal, Double comm, Dept dept) {
+	
+	public void setDeptno(Integer deptno) {
+		this.deptno = deptno;
+	}
+	public Emp(Integer empno, String ename, String job, Integer mgr,
+			Double sal, Double comm, Date hiredate, Integer deptno) {
 		super();
 		this.empno = empno;
 		this.ename = ename;
 		this.job = job;
 		this.mgr = mgr;
-		this.hiredate = hiredate;
 		this.sal = sal;
 		this.comm = comm;
-		this.dept = dept;
+		this.hiredate = hiredate;
+		this.deptno = deptno;
 	}
 	public Integer getEmpno() {
 		return empno;
@@ -79,10 +87,17 @@ public class Emp {
 	public void setHiredate(Date hiredate) {
 		this.hiredate = hiredate;
 	}
+	public Integer getDeptno() {
+		return deptno;
+	}
+	public void setDepteno(Integer deptno) {
+		this.deptno = deptno;
+	}
 	public Dept getDept() {
 		return dept;
 	}
 	public void setDept(Dept dept) {
 		this.dept = dept;
 	}
+	
 }
