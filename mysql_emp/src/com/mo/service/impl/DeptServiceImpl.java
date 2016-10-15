@@ -23,5 +23,14 @@ public class DeptServiceImpl implements DeptService {
 		Map<String, Object> map = new HashMap<String, Object>();
 		return deptMapper.findDepts(map);
 	}
+	
+	/**
+	 * 默默新增的根据编号得到部门
+	 * @param ID
+	 * @return
+	 */
+	public Dept findDept(Integer ID){
+		return null;
+	}
 
 }
