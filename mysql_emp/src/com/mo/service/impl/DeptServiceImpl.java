@@ -32,5 +32,13 @@ public class DeptServiceImpl implements DeptService {
 	public Dept findDept(Integer ID){
 		return null;
 	}
+	
+	/**
+	 * 巍巍新增的得到总记录数
+	 * @return
+	 */
+	public Integer getcounts(){
+		return null;
+	}
 
 }
