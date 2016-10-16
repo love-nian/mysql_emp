@@ -63,5 +63,14 @@ public class DeptServiceImpl implements DeptService {
 	public void show(){
 		System.out.println("巍巍新增的show");
 	}
+	
+	/**
+	 * 默默新增的添加部门
+	 * @param dept
+	 * @return
+	 */
+	public boolean addDept(Dept dept){
+		return true;
+	}
 
 }
