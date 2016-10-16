@@ -40,5 +40,12 @@ public class DeptServiceImpl implements DeptService {
 	public Integer getcounts(){
 		return null;
 	}
+	
+	/**
+	 * 巍巍新增的修改部门
+	 */
+	public boolean updateDept(Dept dept){
+		return false;
+	}
 
 }
