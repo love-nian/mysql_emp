@@ -40,5 +40,14 @@ public class DeptServiceImpl implements DeptService {
 	public Integer getcounts(){
 		return null;
 	}
+	
+	/**
+	 * 默默新增的删除部门
+	 * @param dept
+	 * @return
+	 */
+	public boolean delDept(Dept dept){
+		return false;
+	}
 
 }
