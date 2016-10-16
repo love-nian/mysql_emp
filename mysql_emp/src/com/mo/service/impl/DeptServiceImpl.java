@@ -63,5 +63,12 @@ public class DeptServiceImpl implements DeptService {
 	public void show(){
 		System.out.println("巍巍新增的show");
 	}
+	
+	/**
+	 * 巍巍新增的say
+	 */
+	public void say(){
+		System.out.println("巍巍说：我知道怎样处理冲突");
+	}
 
 }
