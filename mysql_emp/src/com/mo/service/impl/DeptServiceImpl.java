@@ -47,5 +47,14 @@ public class DeptServiceImpl implements DeptService {
 	public boolean updateDept(Dept dept){
 		return false;
 	}
+	
+	/**
+	 * 默默新增的删除部门,解决冲突
+	 * @param dept
+	 * @return
+	 */
+	public boolean delDept(Dept dept){
+		return false;
+	}
 
 }
