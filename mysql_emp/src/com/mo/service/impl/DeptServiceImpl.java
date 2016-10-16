@@ -72,5 +72,12 @@ public class DeptServiceImpl implements DeptService {
 	public boolean addDept(Dept dept){
 		return true;
 	}
+	
+	/**
+	 * 巍巍新增的say
+	 */
+	public void say(){
+		System.out.println("巍巍说：我知道怎样处理冲突");
+	}
 
 }
