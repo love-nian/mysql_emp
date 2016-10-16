@@ -56,5 +56,12 @@ public class DeptServiceImpl implements DeptService {
 	public boolean delDept(Dept dept){
 		return false;
 	}
+	
+	/**
+	 * 巍巍新增的show
+	 */
+	public void show(){
+		System.out.println("巍巍新增的show");
+	}
 
 }
